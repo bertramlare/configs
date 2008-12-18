@@ -22,7 +22,7 @@ date=`date +%b | tr A-Z a-z`
 filename=${dbname}_$date.sql
 
 echo dumping into $filename...
-mysqldump -uroot -e --force $db_to_dump >$filename
+mysqldump -uroot -p -e -f $db_to_dump >$filename
 
 echo zipping into $filename.gz...
 gzip $filename
