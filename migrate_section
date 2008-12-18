@@ -1,0 +1,24 @@
+#!/bin/bash
+
+cd ~/htdocs/mainline/admin/pages/classes/framework/tests
+max_num=`ls [0-9]*.db | sed s/.db$// | sort -rn | head -1`
+max_num=11
+
+if [ -z $1 ]
+then
+	echo "please enter a section to move over"
+	exit
+fi
+
+cd ~/htdocs/mainline/admin/pages/classes/tests/$1
+svn mv initial.db ${1}.db
+
+for i in `ls [0-9]*.db | sed s/.db$//`
+do
+	new_name=`expr $i + $max_num`
+	svn mv ${i}.db ${new_name}.db
+done
+
+echo $max_num
+read one
+vi ${1}Test.php

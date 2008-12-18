@@ -1,0 +1,26 @@
+#!/bin/bash
+
+cd ~/htdocs/mainline/admin/pages/classes/testing
+
+# do all of the tests in package folders
+for i in `find .. -type d -name tests`
+do
+	test_name=`dirname $i`
+	#test_name=`basename $test_name`
+
+	if [ $test_name != '..' ]
+	then
+		echo $test_name
+	fi
+done
+
+# do all of the tests in the classes/tests directory
+for i in `find ../tests -maxdepth 1 -type d ! -wholename "*/.*"`
+do
+	test_name=$i
+
+	if [ $test_name != 'tests' ]
+	then
+		echo $test_name
+	fi
+done

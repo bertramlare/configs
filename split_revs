@@ -1,0 +1,15 @@
+import sys
+import re
+
+sets = ''.join(sys.stdin.readlines()).strip().split(',')
+revs = []
+
+for set in sets:
+	try:
+		(first, last) = set.split('-')
+		revs.extend(range(int(first), int(last) + 1))
+	except ValueError:
+		revs.append(set)
+
+for rev in revs:
+	print rev

@@ -1,0 +1,3 @@
+PRUNEPATHS=`find /home/Brian/htdocs/mainline -type d -name '.svn' -printf "%p "`
+export PRUNEPATHS
+updatedb --localpaths='/home/Brian/htdocs/mainline'
