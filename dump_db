@@ -1,0 +1,28 @@
+#!/bin/bash
+
+dbname=$1
+
+if [ -z $dbname ]
+then
+	echo usage: dump_db DB_NAME [DB_TO_DUMP]
+	exit
+fi
+
+if [ -z $2 ]
+then
+	db_to_dump=${dbname}trim
+else
+	db_to_dump=$2
+fi
+
+echo $db_to_dump
+
+# lowercase the date
+date=`date +%b | tr A-Z a-z`
+filename=${dbname}_$date.sql
+
+echo dumping into $filename...
+mysqldump -uroot -e --force $db_to_dump >$filename
+
+echo zipping into $filename.gz...
+gzip $filename
